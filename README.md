@@ -1,15 +1,15 @@
-ELK integration for KrakenD
+ELK Dashboard for KrakenD
 ===========================
-This repository contains **example configurations** to support an Elastic + Logstash + Kibana (ELK) installation. It includes a Logstash configuration that parses and ingests KrakenD logs, both for KrakenD Enterprise and KrakenD Community Edition.
+This repository contains **example configurations** to support an Elastic + Logstash + Kibana (ELK) installation. It includes a Logstash configuration that parses and ingests KrakenD logs for KrakenD Enterprise and KrakenD Community Edition.
 
-It also includes two Kibana dashboards, one for the **Access Log** activity, and another one for the **Application Log** activity.
+It also includes two Kibana dashboards, one for the **Access Log** activity and another for the **Application Log** activity.
 
-By using the configurations included here you will have KrakenD configured for ELK.
+By using the configurations included here, you will have KrakenD configured for ELK.
 
 ![Kibana screenshot](screenshots/kibana-screenshot.png)
 
 ## Logstash
-The `logstash.conf` file includes an example of a Logstash configuration. Make sure to change the **hostname** of your elasticsearch server, and any custom ports you might use. Start Logstash with this configuration to properly ingest KrakenD logs.
+The `logstash.conf` file includes an example of a Logstash configuration. First, change the **hostname** of your Elasticsearch server and any custom ports you might use. Then, start Logstash with this configuration to properly ingest KrakenD logs.
 
 ## Kibana
 To import the Kibana dashboard included in this repository, execute the following command **once your Kibana is up and running**. Replace `localhost:5601` if needed:
@@ -19,7 +19,7 @@ curl -X POST "localhost:5601/api/saved_objects/_import" -H "kbn-xsrf: true" --fo
 ```
 
 ## KrakenD configuration
-On your `krakend.json` make sure to include the `telemetry/logging` and `telemetry/gelf` components as show below. Make sure the gelf address is correct.
+On your `krakend.json`, ensure to include the `telemetry/logging` and `telemetry/gelf` components as shown below. Also, make sure the GELF address is correct.
 
 ```json
 {
@@ -42,12 +42,11 @@ On your `krakend.json` make sure to include the `telemetry/logging` and `telemet
 ```
 
 ## Contribute!
-This is an example ingestion process and dashboard and it can be improved in many ways.
+In this repository, you have an example of the ingestion process and dashboard visualization, and you can improve it in many ways.
 
 Try it out! If it doesn't help you, or you think you can add additional metrics or improvements, please open a pull request!
 
 Thanks!
-
 
 ---
 
