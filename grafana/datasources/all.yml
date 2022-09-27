@@ -1,0 +1,31 @@
+apiVersion: 1
+
+datasources:
+# InfluxDB v2.x
+-  access: 'proxy'
+   editable: true
+   isDefault: true
+   name: 'influx'
+   orgId: 1
+   type: 'influxdb'
+   url: 'http://influxdb:8086'
+   version: 1
+   database: krakend
+   basicAuth: false
+   jsonData:
+     defaultBucket: krakend
+     httpMode: POST
+     organization: my-org
+     version: Flux
+# InfluxDB v1.x
+-  access: 'proxy'
+   editable: true
+   is_default: false
+   name: 'influxdb'
+   org_id: 1
+   type: 'influxdb'
+   url: 'http://influxdb:8086'
+   version: 1
+   user: krakend-dev
+   password: pas5w0rd
+   database: krakend

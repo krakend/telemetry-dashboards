@@ -7,6 +7,8 @@ This repository contains **example configurations** to support logging and metri
 
 It also includes two Kibana dashboards, one for the **Access Log** activity and another for the **Application Log** activity.
 
+These configurations are used in [KrakenD Playground](https://github.com/krakendio/playground-community) and you can test them directly.
+
 By using the configurations included here, you will have KrakenD configured for ELK.
 
 ![Kibana screenshot](screenshots/kibana-screenshot.png)
@@ -49,6 +51,13 @@ On your `krakend.json`, ensure to include the `telemetry/logging` and `telemetry
 The `grafana` folder includes Grafana dashboards that feed from Influx DB. Depending on your Influx version you will need to use a v1 or a v2 (Flux language) dashboard.
 
 The dashboards are published on Grafana Cloud, and you can [import them from there](https://www.krakend.io/docs/telemetry/grafana/), but the source files are in this folder.
+
+If you are using docker you can mount a volume using the content of this repo as follows:
+
+      volumes:
+      - "./grafana/datasources/all.yml:/etc/grafana/provisioning/datasources/all.yml"
+      - "./grafana/dashboards/all.yml:/etc/grafana/provisioning/dashboards/all.yml"
+      - "./grafana/krakend:/var/lib/grafana/dashboards/krakend"
 
 ## Contribute!
 In this repository, you have an example of the ingestion process and dashboard visualization, and you can improve it in many ways.
