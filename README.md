@@ -30,7 +30,7 @@ On your `krakend.json`, ensure to include the `telemetry/logging` and `telemetry
 
 ```json
 {
-  "$id": "https://www.krakend.io/schema/v3.json",
+  "$schema": "https://www.krakend.io/schema/v3.json",
   "version": 3,
   "extra_config": {
     "telemetry/logging": {
