@@ -17,6 +17,8 @@ datasources:
      httpMode: POST
      organization: my-org
      version: Flux
+   secureJsonData:
+    token: $INFLUXDB_TOKEN
 # InfluxDB v1.x
 -  access: 'proxy'
    editable: true
