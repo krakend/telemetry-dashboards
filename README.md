@@ -7,7 +7,7 @@ This repository contains **example configurations** to support logging and metri
 
 It also includes two Kibana dashboards, one for the **Access Log** activity and another for the **Application Log** activity.
 
-These configurations are used in [KrakenD Playground](https://github.com/krakendio/playground-community) and you can test them directly.
+These configurations are used in [KrakenD Playground](https://github.com/krakend/playground-community) and you can test them directly.
 
 By using the configurations included here, you will have KrakenD configured for ELK.
 
