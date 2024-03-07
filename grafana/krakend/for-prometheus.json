@@ -96,7 +96,7 @@
       }
     ]
   },
-  "description": "OpenTelemetry metrics",
+  "description": "Example of collected OTEL metrics",
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
@@ -3267,7 +3267,8 @@
                 "value": 80
               }
             ]
-          }
+          },
+          "unit": "s"
         },
         "overrides": []
       },
