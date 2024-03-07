@@ -7011,6 +7011,7 @@
         "type": "prometheus",
         "uid": "${DS_PROMETHEUS}"
       },
+      "description": "Percentile 95 of backend duration",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -7103,7 +7104,7 @@
           "useBackend": false
         }
       ],
-      "title": "Avg backend duration",
+      "title": "p95 backend duration",
       "type": "timeseries"
     },
     {
