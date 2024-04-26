@@ -7,14 +7,6 @@
       "type": "datasource",
       "pluginId": "prometheus",
       "pluginName": "Prometheus"
-    },
-    {
-      "name": "DS_TEMPO",
-      "label": "Tempo",
-      "description": "",
-      "type": "datasource",
-      "pluginId": "tempo",
-      "pluginName": "Tempo"
     }
   ],
   "__elements": {},
@@ -62,12 +54,6 @@
       "version": ""
     },
     {
-      "type": "datasource",
-      "id": "tempo",
-      "name": "Tempo",
-      "version": "1.0.0"
-    },
-    {
       "type": "panel",
       "id": "timeseries",
       "name": "Time series",
@@ -96,9 +82,10 @@
       }
     ]
   },
-  "description": "Example of collected OTEL metrics",
+  "description": "RECOMMENDED INSTALL. KrakenD dashboard based on Prometheus integration via OpenTelemetry",
   "editable": true,
   "fiscalYearStartMonth": 0,
+  "gnetId": 20651,
   "graphTooltip": 0,
   "id": null,
   "links": [],
@@ -8496,112 +8483,6 @@
       ],
       "title": "Goroutines",
       "type": "timeseries"
-    },
-    {
-      "collapsed": false,
-      "gridPos": {
-        "h": 1,
-        "w": 24,
-        "x": 0,
-        "y": 334
-      },
-      "id": 9,
-      "panels": [],
-      "title": "Tracing",
-      "type": "row"
-    },
-    {
-      "datasource": {
-        "type": "tempo",
-        "uid": "${DS_TEMPO}"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "custom": {
-            "align": "auto",
-            "cellOptions": {
-              "type": "auto"
-            },
-            "inspect": false
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 19,
-        "w": 24,
-        "x": 0,
-        "y": 335
-      },
-      "id": 10,
-      "options": {
-        "cellHeight": "sm",
-        "footer": {
-          "countRows": false,
-          "fields": "",
-          "reducer": [
-            "sum"
-          ],
-          "show": false
-        },
-        "showHeader": true
-      },
-      "pluginVersion": "10.4.0",
-      "targets": [
-        {
-          "datasource": {
-            "type": "tempo",
-            "uid": "${DS_TEMPO}"
-          },
-          "filters": [
-            {
-              "id": "2adf4ac6",
-              "operator": "=~",
-              "scope": "span",
-              "tag": "http.route",
-              "value": [
-                "$endpoint"
-              ],
-              "valueType": "string"
-            },
-            {
-              "id": "service-name",
-              "operator": "=",
-              "scope": "resource",
-              "tag": "service.name",
-              "value": [],
-              "valueType": "string"
-            },
-            {
-              "id": "span-name",
-              "operator": "=~",
-              "scope": "span",
-              "tag": "name",
-              "value": [],
-              "valueType": "string"
-            }
-          ],
-          "hide": false,
-          "key": "Q-7e494413-0c5c-41b3-bf83-a0c8dc0b4205-0",
-          "limit": 10,
-          "queryType": "traceqlSearch",
-          "refId": "A",
-          "spss": 100,
-          "tableType": "traces"
-        }
-      ],
-      "title": "Latest traces",
-      "type": "table"
     }
   ],
   "refresh": "30s",
@@ -8689,7 +8570,7 @@
       },
       {
         "current": {
-          "selected": true,
+          "selected": false,
           "text": "5m",
           "value": "5m"
         },
@@ -8743,7 +8624,7 @@
       },
       {
         "current": {
-          "selected": true,
+          "selected": false,
           "text": "15",
           "value": "15"
         },
@@ -8793,8 +8674,8 @@
   },
   "timepicker": {},
   "timezone": "",
-  "title": "KrakenD OTEL",
+  "title": "KrakenD - OpenTelemetry + Prometheus",
   "uid": "d7e631a4-afbc-4267-91e8-b9492bcd801b",
-  "version": 8,
+  "version": 1,
   "weekStart": ""
 }
