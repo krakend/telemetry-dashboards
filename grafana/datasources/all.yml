@@ -45,7 +45,7 @@ datasources:
 # InfluxDB v2.x
 -  access: 'proxy'
    editable: true
-   isDefault: true
+   isDefault: false
    name: 'influx'
    orgId: 1
    type: 'influxdb'
