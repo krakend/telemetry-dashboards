@@ -21,7 +21,7 @@
       }
     ]
   },
-  "description": "KrakenD dashboard based on Prometheus integration via OpenTelemetry",
+  "description": "Dashboard for Krakend Redis usage monitoring, based on OpenTelemetry Redis auto-instrumentation",
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
@@ -768,9 +768,7 @@
       {
         "allValue": ".*",
         "current": {
-          "text": [
-            "All"
-          ],
+          "text": "All",
           "value": [
             "$__all"
           ]
@@ -922,6 +920,6 @@
   "timezone": "",
   "title": "KrakenD - Redis",
   "uid": "ee6ednvp4c2kgf",
-  "version": 3,
+  "version": 4,
   "weekStart": ""
 }
