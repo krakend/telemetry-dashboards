@@ -337,7 +337,7 @@
         {
           "disableTextWrap": false,
           "editorMode": "code",
-          "expr": "sum by(state) (avg_over_time(db_client_connections_usage{app=~\"$app\", instance=~\"$instance\", http_route=~\"$endpoint\", state=\"idle\"}[$interval]))",
+          "expr": "avg_over_time(db_client_connections_usage{app=~\"$app\", instance=~\"$instance\", http_route=~\"$endpoint\", state=\"idle\"}[$interval])",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
           "legendFormat": "__auto",
