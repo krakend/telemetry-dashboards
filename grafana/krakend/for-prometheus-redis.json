@@ -113,73 +113,6 @@
         "type": "prometheus",
         "uid": "krakend_prometheus_datasource"
       },
-      "description": "The maximum number of idle open connections allowed",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "fixedColor": "text",
-            "mode": "fixed"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              }
-            ]
-          },
-          "unit": "none"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 3,
-        "w": 3,
-        "x": 3,
-        "y": 1
-      },
-      "id": 118,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "percentChangeColorMode": "standard",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showPercentChange": false,
-        "textMode": "auto",
-        "wideLayout": true
-      },
-      "pluginVersion": "11.3.2",
-      "targets": [
-        {
-          "disableTextWrap": false,
-          "editorMode": "code",
-          "expr": "sum(db_client_connections_idle_max{app=~\"$app\", instance=~\"$instance\", krakend_endpoint_route=~\"$endpoint\"})",
-          "fullMetaSearch": false,
-          "includeNullMetadata": true,
-          "legendFormat": "__auto",
-          "range": true,
-          "refId": "A",
-          "useBackend": false
-        }
-      ],
-      "title": "Max idle connections",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "krakend_prometheus_datasource"
-      },
       "description": "The minimum number of idle open connections allowed",
       "fieldConfig": {
         "defaults": {
@@ -204,7 +137,7 @@
       "gridPos": {
         "h": 3,
         "w": 3,
-        "x": 6,
+        "x": 3,
         "y": 1
       },
       "id": 119,
@@ -243,6 +176,73 @@
       "type": "stat"
     },
     {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "krakend_prometheus_datasource"
+      },
+      "description": "The maximum number of idle open connections allowed",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "text",
+            "mode": "fixed"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 3,
+        "x": 6,
+        "y": 1
+      },
+      "id": 118,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "11.3.2",
+      "targets": [
+        {
+          "disableTextWrap": false,
+          "editorMode": "code",
+          "expr": "sum(db_client_connections_idle_max{app=~\"$app\", instance=~\"$instance\", krakend_endpoint_route=~\"$endpoint\"})",
+          "fullMetaSearch": false,
+          "includeNullMetadata": true,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A",
+          "useBackend": false
+        }
+      ],
+      "title": "Max idle connections",
+      "type": "stat"
+    },
+    {
       "collapsed": false,
       "gridPos": {
         "h": 1,
@@ -259,7 +259,7 @@
       "datasource": {
         "uid": "krakend_prometheus_datasource"
       },
-      "description": "The number of connections that are currently in state described by the state attribute",
+      "description": "The number of connections that are currently in idle state",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -315,7 +315,7 @@
       },
       "gridPos": {
         "h": 8,
-        "w": 15,
+        "w": 7,
         "x": 0,
         "y": 5
       },
@@ -337,7 +337,7 @@
         {
           "disableTextWrap": false,
           "editorMode": "code",
-          "expr": "sum by(state) (avg_over_time(db_client_connections_usage{app=~\"$app\", instance=~\"$instance\", http_route=~\"$endpoint\"}[$interval]))",
+          "expr": "sum by(state) (avg_over_time(db_client_connections_usage{app=~\"$app\", instance=~\"$instance\", http_route=~\"$endpoint\", state=\"idle\"}[$interval]))",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
           "legendFormat": "__auto",
@@ -346,7 +346,102 @@
           "useBackend": false
         }
       ],
-      "title": "Connection count",
+      "title": "Avg Idle count",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "krakend_prometheus_datasource"
+      },
+      "description": "The number of new pool connections",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "displayName": "Value",
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 7,
+        "y": 5
+      },
+      "id": 121,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.3.2",
+      "targets": [
+        {
+          "editorMode": "code",
+          "expr": "sum(changes(db_client_connections_usage{app=~\"$app\", instance=~\"$instance\", http_route=~\"$endpoint\", state=\"used\"}[$interval]))",
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "New connections",
       "type": "timeseries"
     },
     {
@@ -673,7 +768,9 @@
       {
         "allValue": ".*",
         "current": {
-          "text": "All",
+          "text": [
+            "All"
+          ],
           "value": [
             "$__all"
           ]
@@ -818,13 +915,13 @@
     ]
   },
   "time": {
-    "from": "now-30m",
+    "from": "now-1h",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "",
   "title": "KrakenD - Redis",
   "uid": "ee6ednvp4c2kgf",
-  "version": 2,
+  "version": 3,
   "weekStart": ""
 }
