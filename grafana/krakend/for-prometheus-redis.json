@@ -1,4 +1,41 @@
 {
+  "__inputs": [
+    {
+      "name": "DS_PROMETHEUS",
+      "label": "Prometheus",
+      "description": "",
+      "type": "datasource",
+      "pluginId": "prometheus",
+      "pluginName": "Prometheus"
+    }
+  ],
+  "__elements": {},
+  "__requires": [
+    {
+      "type": "grafana",
+      "id": "grafana",
+      "name": "Grafana",
+      "version": "11.3.2"
+    },
+    {
+      "type": "datasource",
+      "id": "prometheus",
+      "name": "Prometheus",
+      "version": "1.0.0"
+    },
+    {
+      "type": "panel",
+      "id": "stat",
+      "name": "Stat",
+      "version": ""
+    },
+    {
+      "type": "panel",
+      "id": "timeseries",
+      "name": "Time series",
+      "version": ""
+    }
+  ],
   "annotations": {
     "list": [
       {
@@ -25,7 +62,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 2,
+  "id": null,
   "links": [],
   "panels": [
     {
@@ -44,7 +81,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "krakend_prometheus_datasource"
+        "uid": "${DS_PROMETHEUS}"
       },
       "description": "The maximum number of open connections allowed",
       "fieldConfig": {
@@ -102,7 +139,11 @@
           "legendFormat": "__auto",
           "range": true,
           "refId": "A",
-          "useBackend": false
+          "useBackend": false,
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          }
         }
       ],
       "title": "Max connections",
@@ -111,7 +152,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "krakend_prometheus_datasource"
+        "uid": "${DS_PROMETHEUS}"
       },
       "description": "The minimum number of idle open connections allowed",
       "fieldConfig": {
@@ -169,7 +210,11 @@
           "legendFormat": "__auto",
           "range": true,
           "refId": "A",
-          "useBackend": false
+          "useBackend": false,
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          }
         }
       ],
       "title": "Min idle connections",
@@ -178,7 +223,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "krakend_prometheus_datasource"
+        "uid": "${DS_PROMETHEUS}"
       },
       "description": "The maximum number of idle open connections allowed",
       "fieldConfig": {
@@ -236,7 +281,11 @@
           "legendFormat": "__auto",
           "range": true,
           "refId": "A",
-          "useBackend": false
+          "useBackend": false,
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          }
         }
       ],
       "title": "Max idle connections",
@@ -257,7 +306,8 @@
     },
     {
       "datasource": {
-        "uid": "krakend_prometheus_datasource"
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
       },
       "description": "The number of connections that are currently in idle state",
       "fieldConfig": {
@@ -343,7 +393,11 @@
           "legendFormat": "__auto",
           "range": true,
           "refId": "A",
-          "useBackend": false
+          "useBackend": false,
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          }
         }
       ],
       "title": "Avg Idle count",
@@ -352,7 +406,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "krakend_prometheus_datasource"
+        "uid": "${DS_PROMETHEUS}"
       },
       "description": "The number of new pool connections",
       "fieldConfig": {
@@ -438,7 +492,11 @@
           "expr": "sum(changes(db_client_connections_usage{app=~\"$app\", instance=~\"$instance\", http_route=~\"$endpoint\", state=\"used\"}[$interval]))",
           "legendFormat": "__auto",
           "range": true,
-          "refId": "A"
+          "refId": "A",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          }
         }
       ],
       "title": "New connections",
@@ -446,7 +504,8 @@
     },
     {
       "datasource": {
-        "uid": "krakend_prometheus_datasource"
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
       },
       "description": "The number of connection timeouts that have occurred trying to obtain a connection from the pool",
       "fieldConfig": {
@@ -534,7 +593,11 @@
           "legendFormat": "__auto",
           "range": true,
           "refId": "A",
-          "useBackend": false
+          "useBackend": false,
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          }
         }
       ],
       "title": "Connection timeouts",
@@ -543,7 +606,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "krakend_prometheus_datasource"
+        "uid": "${DS_PROMETHEUS}"
       },
       "description": "The time it took to create a new connection.",
       "fieldConfig": {
@@ -629,7 +692,11 @@
           "expr": "avg(rate(db_client_connections_create_time_milliseconds_count{app=~\"$app\", instance=~\"$instance\", http_route=~\"$endpoint\"}[$interval]))",
           "legendFormat": "__auto",
           "range": true,
-          "refId": "A"
+          "refId": "A",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          }
         }
       ],
       "title": "Avg creation time",
@@ -638,7 +705,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "krakend_prometheus_datasource"
+        "uid": "${DS_PROMETHEUS}"
       },
       "description": "The time between borrowing a connection and returning it to the pool",
       "fieldConfig": {
@@ -724,14 +791,17 @@
           "expr": "avg(rate(db_client_connections_use_time_milliseconds_count{app=~\"$app\", instance=~\"$instance\", http_route=~\"$endpoint\"}[$interval]))",
           "legendFormat": "__auto",
           "range": true,
-          "refId": "A"
+          "refId": "A",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          }
         }
       ],
       "title": "Avg usage time",
       "type": "timeseries"
     }
   ],
-  "preload": false,
   "refresh": "30s",
   "schemaVersion": 40,
   "tags": [],
@@ -739,15 +809,10 @@
     "list": [
       {
         "allValue": ".*",
-        "current": {
-          "text": "All",
-          "value": [
-            "$__all"
-          ]
-        },
+        "current": {},
         "datasource": {
           "type": "prometheus",
-          "uid": "krakend_prometheus_datasource"
+          "uid": "${DS_PROMETHEUS}"
         },
         "definition": "label_values(app)",
         "description": "Filter by reporting application",
@@ -767,15 +832,10 @@
       },
       {
         "allValue": ".*",
-        "current": {
-          "text": "All",
-          "value": [
-            "$__all"
-          ]
-        },
+        "current": {},
         "datasource": {
           "type": "prometheus",
-          "uid": "krakend_prometheus_datasource"
+          "uid": "${DS_PROMETHEUS}"
         },
         "definition": "label_values(instance)",
         "description": "The Instance that we want to monitor",
@@ -796,15 +856,10 @@
       },
       {
         "allValue": ".*",
-        "current": {
-          "text": "All",
-          "value": [
-            "$__all"
-          ]
-        },
+        "current": {},
         "datasource": {
           "type": "prometheus",
-          "uid": "krakend_prometheus_datasource"
+          "uid": "${DS_PROMETHEUS}"
         },
         "definition": "label_values(krakend_proxy_duration_bucket,http_route)",
         "description": "KrakenD exposed endpoint",
@@ -920,6 +975,6 @@
   "timezone": "",
   "title": "KrakenD - Redis",
   "uid": "ee6ednvp4c2kgf",
-  "version": 4,
+  "version": 1,
   "weekStart": ""
 }
