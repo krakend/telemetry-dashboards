@@ -59,6 +59,16 @@ If you are using docker you can mount a volume using the content of this repo as
       - "./grafana/dashboards/all.yml:/etc/grafana/provisioning/dashboards/all.yml"
       - "./grafana/krakend:/var/lib/grafana/dashboards/krakend"
 
+### Redis Dashboard overview
+The Redis dashboard is designed to provide insights into metrics specifically related to Krakend usage. It is **not** intended as a tool for monitoring Redis instances or clusters directly.
+
+For comprehensive monitoring of your Redis instances, we recommend installing the [Redis Data Source plugin for Grafana](https://grafana.com/grafana/plugins/redis-datasource/) and importing a pre-built dashboard that suits your requirements. You can explore a variety of dashboards created by the Redis team on their [Grafana page](https://grafana.com/orgs/redis).
+
+If you are using docker, you can optionally provision the `redis-datasource` plugin in your Grafana container by adding this env variable:
+
+    environment:
+      - GF_INSTALL_PLUGINS=redis-datasource
+
 ## Contribute!
 In this repository, you have an example of the ingestion process and dashboard visualization, and you can improve it in many ways.
 
