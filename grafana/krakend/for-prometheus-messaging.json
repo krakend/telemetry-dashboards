@@ -152,7 +152,7 @@
           },
           "disableTextWrap": false,
           "editorMode": "code",
-          "expr": "rate(messaging_read_body_duration_seconds_sum{app=~\"$app\", instance=~\"$instance\", messaging_origin=\"subscriber\",messaging_kind=~\"$kind\", messaging_topic=\"$topic\"}[$interval]) / rate(messaging_read_body_duration_seconds_count{app=~\"$app\", instance=~\"$instance\"}[$interval])",
+          "expr": "rate(messaging_read_body_duration_seconds_sum{app=~\"$app\", instance=~\"$instance\", messaging_origin=\"subscriber\",messaging_kind=~\"$kind\", messaging_topic=~\"$topic\"}[$interval]) / rate(messaging_read_body_duration_seconds_count{app=~\"$app\", instance=~\"$instance\", messaging_origin=\"subscriber\",messaging_kind=~\"$kind\", messaging_topic=~\"$topic\"}[$interval])",
           "fullMetaSearch": false,
           "includeNullMetadata": false,
           "instant": false,
@@ -258,7 +258,7 @@
           },
           "disableTextWrap": false,
           "editorMode": "code",
-          "expr": "rate(messaging_read_body_size_bytes_sum{app=~\"$app\", instance=~\"$instance\", messaging_origin=\"subscriber\",messaging_kind=~\"$kind\", messaging_topic=\"$topic\"}[$interval]) / rate(messaging_read_body_size_bytes_count{app=~\"$app\", instance=~\"$instance\"}[$interval])",
+          "expr": "rate(messaging_read_body_size_bytes_sum{app=~\"$app\", instance=~\"$instance\", messaging_origin=\"subscriber\",messaging_kind=~\"$kind\", messaging_topic=~\"$topic\"}[$interval]) / rate(messaging_read_body_size_bytes_count{app=~\"$app\", instance=~\"$instance\", messaging_origin=\"subscriber\", messaging_kind=~\"$kind\", messaging_topic=~\"$topic\"}[$interval])",
           "fullMetaSearch": false,
           "includeNullMetadata": false,
           "instant": false,
@@ -345,7 +345,7 @@
           },
           "disableTextWrap": false,
           "editorMode": "code",
-          "expr": "sum(increase(messaging_read_body_duration_seconds_bucket{app=~\"$app\", instance=~\"$instance\", messaging_origin=\"subscriber\",messaging_kind=~\"$kind\", messaging_topic=\"$topic\"}[$__interval])) by (le)",
+          "expr": "sum(increase(messaging_read_body_duration_seconds_bucket{app=~\"$app\", instance=~\"$instance\", messaging_origin=\"subscriber\",messaging_kind=~\"$kind\", messaging_topic=~\"$topic\"}[$__interval])) by (le)",
           "format": "heatmap",
           "fullMetaSearch": false,
           "includeNullMetadata": false,
@@ -433,7 +433,7 @@
           },
           "disableTextWrap": false,
           "editorMode": "code",
-          "expr": "sum(increase(messaging_read_body_size_bytes_bucket{app=~\"$app\", instance=~\"$instance\", messaging_origin=\"subscriber\",messaging_kind=~\"$kind\", messaging_topic=\"$topic\"}[$__interval])) by (le)",
+          "expr": "sum(increase(messaging_read_body_size_bytes_bucket{app=~\"$app\", instance=~\"$instance\", messaging_origin=\"subscriber\",messaging_kind=~\"$kind\", messaging_topic=~\"$topic\"}[$__interval])) by (le)",
           "format": "heatmap",
           "fullMetaSearch": false,
           "includeNullMetadata": false,
@@ -540,7 +540,7 @@
           },
           "disableTextWrap": false,
           "editorMode": "code",
-          "expr": "rate(messaging_write_body_duration_seconds_sum{app=~\"$app\", instance=~\"$instance\",messaging_kind=~\"$kind\", messaging_topic=\"$topic\"}[$interval]) / rate(messaging_write_body_duration_seconds_count{app=~\"$app\", instance=~\"$instance\"}[$interval])",
+          "expr": "rate(messaging_write_body_duration_seconds_sum{app=~\"$app\", instance=~\"$instance\",messaging_kind=~\"$kind\", messaging_topic=~\"$topic\"}[$interval]) / rate(messaging_write_body_duration_seconds_count{app=~\"$app\", instance=~\"$instance\",messaging_kind=~\"$kind\", messaging_topic=~\"$topic\"}[$interval])",
           "fullMetaSearch": false,
           "includeNullMetadata": false,
           "instant": false,
@@ -646,7 +646,7 @@
           },
           "disableTextWrap": false,
           "editorMode": "code",
-          "expr": "rate(messaging_write_body_size_bytes_sum{app=~\"$app\", instance=~\"$instance\",messaging_kind=~\"$kind\", messaging_topic=\"$topic\"}[$interval]) / rate(messaging_write_body_size_bytes_count{app=~\"$app\", instance=~\"$instance\"}[$interval])",
+          "expr": "rate(messaging_write_body_size_bytes_sum{app=~\"$app\", instance=~\"$instance\",messaging_kind=~\"$kind\", messaging_topic=~\"$topic\"}[$interval]) / rate(messaging_write_body_size_bytes_count{app=~\"$app\", instance=~\"$instance\",messaging_kind=~\"$kind\", messaging_topic=~\"$topic\"}[$interval])",
           "fullMetaSearch": false,
           "includeNullMetadata": false,
           "instant": false,
@@ -733,7 +733,7 @@
           },
           "disableTextWrap": false,
           "editorMode": "code",
-          "expr": "sum(increase(messaging_write_body_duration_seconds_bucket{app=~\"$app\", instance=~\"$instance\", messaging_kind=~\"$kind\", messaging_topic=\"$topic\"}[$__interval])) by (le)",
+          "expr": "sum(increase(messaging_write_body_duration_seconds_bucket{app=~\"$app\", instance=~\"$instance\", messaging_kind=~\"$kind\", messaging_topic=~\"$topic\"}[$__interval])) by (le)",
           "format": "heatmap",
           "fullMetaSearch": false,
           "includeNullMetadata": false,
@@ -821,7 +821,7 @@
           },
           "disableTextWrap": false,
           "editorMode": "code",
-          "expr": "sum(increase(messaging_write_body_size_bytes_bucket{app=~\"$app\", instance=~\"$instance\", messaging_kind=~\"$kind\", messaging_topic=\"$topic\"}[$__interval])) by (le)",
+          "expr": "sum(increase(messaging_write_body_size_bytes_bucket{app=~\"$app\", instance=~\"$instance\", messaging_kind=~\"$kind\", messaging_topic=~\"$topic\"}[$__interval])) by (le)",
           "format": "heatmap",
           "fullMetaSearch": false,
           "includeNullMetadata": false,
@@ -928,7 +928,7 @@
           },
           "disableTextWrap": false,
           "editorMode": "code",
-          "expr": "rate(messaging_read_body_duration_seconds_sum{app=~\"$app\", instance=~\"$instance\", messaging_origin=\"asyncagent\",messaging_kind=~\"$kind\", messaging_topic=\"$topic\"}[$interval]) / rate(messaging_read_body_duration_seconds_count{app=~\"$app\", instance=~\"$instance\",  messaging_origin=\"asyncagent\",messaging_kind=~\"$kind\", messaging_topic=\"$topic\"}[$interval])",
+          "expr": "rate(messaging_read_body_duration_seconds_sum{app=~\"$app\", instance=~\"$instance\", messaging_origin=\"asyncagent\",messaging_kind=~\"$kind\", messaging_topic=~\"$topic\"}[$interval]) / rate(messaging_read_body_duration_seconds_count{app=~\"$app\", instance=~\"$instance\",  messaging_origin=\"asyncagent\",messaging_kind=~\"$kind\", messaging_topic=~\"$topic\"}[$interval])",
           "fullMetaSearch": false,
           "includeNullMetadata": false,
           "instant": false,
@@ -1034,7 +1034,7 @@
           },
           "disableTextWrap": false,
           "editorMode": "code",
-          "expr": "rate(messaging_read_body_size_bytes_sum{app=~\"$app\", instance=~\"$instance\", messaging_origin=\"asyncagent\",messaging_kind=~\"$kind\", messaging_topic=\"$topic\"}[$interval]) / rate(messaging_read_body_size_bytes_count{app=~\"$app\", instance=~\"$instance\", messaging_origin=\"asyncagent\",messaging_kind=~\"$kind\", messaging_topic=\"$topic\"}[$interval])",
+          "expr": "rate(messaging_read_body_size_bytes_sum{app=~\"$app\", instance=~\"$instance\", messaging_origin=\"asyncagent\",messaging_kind=~\"$kind\", messaging_topic=~\"$topic\"}[$interval]) / rate(messaging_read_body_size_bytes_count{app=~\"$app\", instance=~\"$instance\", messaging_origin=\"asyncagent\",messaging_kind=~\"$kind\", messaging_topic=~\"$topic\"}[$interval])",
           "fullMetaSearch": false,
           "includeNullMetadata": false,
           "instant": false,
@@ -1121,7 +1121,7 @@
           },
           "disableTextWrap": false,
           "editorMode": "code",
-          "expr": "sum(increase(messaging_read_body_duration_seconds_bucket{app=~\"$app\", instance=~\"$instance\", messaging_origin=\"asyncagent\",messaging_kind=~\"$kind\", messaging_topic=\"$topic\"}[$__interval])) by (le)",
+          "expr": "sum(increase(messaging_read_body_duration_seconds_bucket{app=~\"$app\", instance=~\"$instance\", messaging_origin=\"asyncagent\",messaging_kind=~\"$kind\", messaging_topic=~\"$topic\"}[$__interval])) by (le)",
           "format": "heatmap",
           "fullMetaSearch": false,
           "includeNullMetadata": false,
@@ -1209,7 +1209,7 @@
           },
           "disableTextWrap": false,
           "editorMode": "code",
-          "expr": "sum(increase(messaging_read_body_size_bytes_bucket{app=~\"$app\", instance=~\"$instance\", messaging_origin=\"asyncagent\",messaging_kind=~\"$kind\", messaging_topic=\"$topic\"}[$__interval])) by (le)",
+          "expr": "sum(increase(messaging_read_body_size_bytes_bucket{app=~\"$app\", instance=~\"$instance\", messaging_origin=\"asyncagent\",messaging_kind=~\"$kind\", messaging_topic=~\"$topic\"}[$__interval])) by (le)",
           "format": "heatmap",
           "fullMetaSearch": false,
           "includeNullMetadata": false,
@@ -1222,6 +1222,428 @@
       ],
       "title": "Async Agent Read Size",
       "type": "heatmap"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "description": "Read Failures Avg Latency",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "min": 0,
+          "noValue": "-",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "s"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 48
+      },
+      "id": 14,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.5.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "disableTextWrap": false,
+          "editorMode": "code",
+          "expr": "rate(messaging_read_failure_count_seconds_sum{app=~\"$app\", instance=~\"$instance\", messaging_origin=\"asyncagent\",messaging_kind=~\"$kind\", messaging_topic=~\"$topic\"}[$interval]) / rate(messaging_read_failure_count_seconds_count{app=~\"$app\", instance=~\"$instance\",  messaging_origin=\"asyncagent\",messaging_kind=~\"$kind\", messaging_topic=~\"$topic\"}[$interval])",
+          "fullMetaSearch": false,
+          "includeNullMetadata": false,
+          "instant": false,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A",
+          "useBackend": false
+        }
+      ],
+      "title": "Read Failures Avg Latency",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "description": "Read Failures Count",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "min": 0,
+          "noValue": "-",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 48
+      },
+      "id": 16,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.5.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "disableTextWrap": false,
+          "editorMode": "code",
+          "expr": "rate(messaging_read_failure_count_seconds_count{app=~\"$app\", instance=~\"$instance\", messaging_origin=\"asyncagent\",messaging_kind=~\"$kind\", messaging_topic=~\"$topic\"}[$interval])",
+          "fullMetaSearch": false,
+          "includeNullMetadata": false,
+          "instant": false,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A",
+          "useBackend": false
+        }
+      ],
+      "title": "Read Failures Count",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "description": "Write Failures Avg Latency",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "min": 0,
+          "noValue": "-",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "s"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 56
+      },
+      "id": 15,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.5.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "disableTextWrap": false,
+          "editorMode": "code",
+          "expr": "rate(messaging_write_failure_count_seconds_sum{app=~\"$app\", instance=~\"$instance\",messaging_kind=~\"$kind\", messaging_topic=~\"$topic\"}[$interval]) / rate(messaging_write_failure_count_seconds_count{app=~\"$app\", instance=~\"$instance\",  messaging_origin=\"asyncagent\",messaging_kind=~\"$kind\", messaging_topic=~\"$topic\"}[$interval])",
+          "fullMetaSearch": false,
+          "includeNullMetadata": false,
+          "instant": false,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A",
+          "useBackend": false
+        }
+      ],
+      "title": "Write Failures Avg Latency",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "description": "Read Failures Count",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "min": 0,
+          "noValue": "-",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 56
+      },
+      "id": 17,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.5.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "disableTextWrap": false,
+          "editorMode": "code",
+          "expr": "rate(messaging_write_failure_count_seconds_count{app=~\"$app\", instance=~\"$instance\", messaging_origin=\"asyncagent\",messaging_kind=~\"$kind\", messaging_topic=~\"$topic\"}[$interval])",
+          "fullMetaSearch": false,
+          "includeNullMetadata": false,
+          "instant": false,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A",
+          "useBackend": false
+        }
+      ],
+      "title": "Read Failures Count",
+      "type": "timeseries"
     }
   ],
   "refresh": "",
@@ -1364,6 +1786,6 @@
   "timezone": "browser",
   "title": "Krakend Messaging",
   "uid": "dfe7p8ieu3x1ca",
-  "version": 10,
+  "version": 11,
   "weekStart": ""
 }
