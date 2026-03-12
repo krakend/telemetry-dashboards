@@ -60,392 +60,18 @@
   "links": [],
   "panels": [
     {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
-      },
-      "description": "Average response latency",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisBorderShow": false,
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "barWidthFactor": 0.6,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "insertNulls": false,
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "min": 0,
-          "noValue": "-",
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "s"
-        },
-        "overrides": []
-      },
+      "collapsed": false,
       "gridPos": {
-        "h": 8,
-        "w": 12,
+        "h": 1,
+        "w": 24,
         "x": 0,
         "y": 0
       },
-      "id": 3,
-      "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "table",
-          "placement": "right",
-          "showLegend": true
-        },
-        "tooltip": {
-          "hideZeros": false,
-          "mode": "single",
-          "sort": "none"
-        }
-      },
-      "pluginVersion": "11.5.2",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "disableTextWrap": false,
-          "editorMode": "code",
-          "expr": "rate(messaging_read_body_duration_seconds_sum{app=~\"$app\", instance=~\"$instance\", messaging_origin=\"subscriber\",messaging_kind=~\"$kind\", messaging_topic=~\"$topic\"}[$interval]) / rate(messaging_read_body_duration_seconds_count{app=~\"$app\", instance=~\"$instance\", messaging_origin=\"subscriber\",messaging_kind=~\"$kind\", messaging_topic=~\"$topic\"}[$interval])",
-          "fullMetaSearch": false,
-          "includeNullMetadata": false,
-          "instant": false,
-          "legendFormat": "{{http_request_method}} {{http_route}}",
-          "range": true,
-          "refId": "A",
-          "useBackend": false
-        }
-      ],
-      "title": "Subscriber Avg Latency",
-      "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
-      },
-      "description": "Average body size",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisBorderShow": false,
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "barWidthFactor": 0.6,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "insertNulls": false,
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "min": 0,
-          "noValue": "-",
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "decbytes"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 12,
-        "x": 12,
-        "y": 0
-      },
-      "id": 5,
-      "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "table",
-          "placement": "right",
-          "showLegend": true
-        },
-        "tooltip": {
-          "hideZeros": false,
-          "mode": "single",
-          "sort": "none"
-        }
-      },
-      "pluginVersion": "11.5.2",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "disableTextWrap": false,
-          "editorMode": "code",
-          "expr": "rate(messaging_read_body_size_bytes_sum{app=~\"$app\", instance=~\"$instance\", messaging_origin=\"subscriber\",messaging_kind=~\"$kind\", messaging_topic=~\"$topic\"}[$interval]) / rate(messaging_read_body_size_bytes_count{app=~\"$app\", instance=~\"$instance\", messaging_origin=\"subscriber\", messaging_kind=~\"$kind\", messaging_topic=~\"$topic\"}[$interval])",
-          "fullMetaSearch": false,
-          "includeNullMetadata": false,
-          "instant": false,
-          "legendFormat": "{{http_request_method}} {{http_route}}",
-          "range": true,
-          "refId": "A",
-          "useBackend": false
-        }
-      ],
-      "title": "Subscriber Avg Size",
-      "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
-      },
-      "description": "Histogram showing time spent reading on a subscriber backend.",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "scaleDistribution": {
-              "type": "linear"
-            }
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 12,
-        "x": 0,
-        "y": 8
-      },
-      "id": 2,
-      "interval": "$interval",
-      "options": {
-        "calculate": false,
-        "cellGap": 1,
-        "color": {
-          "exponent": 0.5,
-          "fill": "dark-orange",
-          "mode": "scheme",
-          "reverse": false,
-          "scale": "exponential",
-          "scheme": "Oranges",
-          "steps": 64
-        },
-        "exemplars": {
-          "color": "rgba(255,0,255,0.7)"
-        },
-        "filterValues": {
-          "le": 1e-9
-        },
-        "legend": {
-          "show": true,
-          "showLegend": true
-        },
-        "rowsFrame": {
-          "layout": "auto"
-        },
-        "tooltip": {
-          "mode": "single",
-          "showColorScale": false,
-          "yHistogram": false
-        },
-        "yAxis": {
-          "axisPlacement": "left",
-          "reverse": false,
-          "unit": "s"
-        }
-      },
-      "pluginVersion": "11.5.2",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "disableTextWrap": false,
-          "editorMode": "code",
-          "expr": "sum(increase(messaging_read_body_duration_seconds_bucket{app=~\"$app\", instance=~\"$instance\", messaging_origin=\"subscriber\",messaging_kind=~\"$kind\", messaging_topic=~\"$topic\"}[$__interval])) by (le)",
-          "format": "heatmap",
-          "fullMetaSearch": false,
-          "includeNullMetadata": false,
-          "instant": false,
-          "legendFormat": "__auto",
-          "range": true,
-          "refId": "A",
-          "useBackend": false
-        }
-      ],
-      "title": "Subscriber Read Duration",
-      "type": "heatmap"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
-      },
-      "description": "Histogram showing body size read on subscriber backends.",
-      "fieldConfig": {
-        "defaults": {
-          "custom": {
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "scaleDistribution": {
-              "type": "linear"
-            }
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 12,
-        "x": 12,
-        "y": 8
-      },
-      "id": 6,
-      "interval": "$interval",
-      "options": {
-        "calculate": false,
-        "cellGap": 1,
-        "color": {
-          "exponent": 0.5,
-          "fill": "dark-orange",
-          "mode": "scheme",
-          "reverse": false,
-          "scale": "exponential",
-          "scheme": "Oranges",
-          "steps": 64
-        },
-        "exemplars": {
-          "color": "rgba(255,0,255,0.7)"
-        },
-        "filterValues": {
-          "le": 1e-9
-        },
-        "legend": {
-          "show": true,
-          "showLegend": true
-        },
-        "rowsFrame": {
-          "layout": "auto"
-        },
-        "tooltip": {
-          "mode": "single",
-          "showColorScale": false,
-          "yHistogram": false
-        },
-        "yAxis": {
-          "axisPlacement": "left",
-          "reverse": false,
-          "unit": "decbytes"
-        }
-      },
-      "pluginVersion": "11.5.2",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "disableTextWrap": false,
-          "editorMode": "code",
-          "expr": "sum(increase(messaging_read_body_size_bytes_bucket{app=~\"$app\", instance=~\"$instance\", messaging_origin=\"subscriber\",messaging_kind=~\"$kind\", messaging_topic=~\"$topic\"}[$__interval])) by (le)",
-          "format": "heatmap",
-          "fullMetaSearch": false,
-          "includeNullMetadata": false,
-          "instant": false,
-          "legendFormat": "__auto",
-          "range": true,
-          "refId": "A",
-          "useBackend": false
-        }
-      ],
-      "title": "Subscriber Read Size",
-      "type": "heatmap"
+      "id": 19,
+      "panels": [],
+      "repeat": "kind",
+      "title": "$kind Publisher",
+      "type": "row"
     },
     {
       "datasource": {
@@ -515,7 +141,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 16
+        "y": 1
       },
       "id": 8,
       "options": {
@@ -544,7 +170,7 @@
           "fullMetaSearch": false,
           "includeNullMetadata": false,
           "instant": false,
-          "legendFormat": "{{http_request_method}} {{http_route}}",
+          "legendFormat": "{{messaging_topic}}",
           "range": true,
           "refId": "A",
           "useBackend": false
@@ -621,7 +247,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 16
+        "y": 1
       },
       "id": 9,
       "options": {
@@ -650,7 +276,7 @@
           "fullMetaSearch": false,
           "includeNullMetadata": false,
           "instant": false,
-          "legendFormat": "{{http_request_method}} {{http_route}}",
+          "legendFormat": "{{messaging_topic}}",
           "range": true,
           "refId": "A",
           "useBackend": false
@@ -684,7 +310,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 24
+        "y": 9
       },
       "id": 4,
       "interval": "$interval",
@@ -772,7 +398,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 24
+        "y": 9
       },
       "id": 7,
       "interval": "$interval",
@@ -840,7 +466,7 @@
         "type": "prometheus",
         "uid": "${DS_PROMETHEUS}"
       },
-      "description": "Average read latency",
+      "description": "Write Failures Avg Latency",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -903,9 +529,9 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 32
+        "y": 17
       },
-      "id": 10,
+      "id": 15,
       "options": {
         "legend": {
           "calcs": [],
@@ -928,17 +554,242 @@
           },
           "disableTextWrap": false,
           "editorMode": "code",
-          "expr": "rate(messaging_read_body_duration_seconds_sum{app=~\"$app\", instance=~\"$instance\", messaging_origin=\"asyncagent\",messaging_kind=~\"$kind\", messaging_topic=~\"$topic\"}[$interval]) / rate(messaging_read_body_duration_seconds_count{app=~\"$app\", instance=~\"$instance\",  messaging_origin=\"asyncagent\",messaging_kind=~\"$kind\", messaging_topic=~\"$topic\"}[$interval])",
+          "expr": "rate(messaging_write_failure_count_seconds_sum{app=~\"$app\", instance=~\"$instance\",messaging_kind=~\"$kind\", messaging_topic=~\"$topic\"}[$interval]) / rate(messaging_write_failure_count_seconds_count{app=~\"$app\", instance=~\"$instance\",messaging_kind=~\"$kind\", messaging_topic=~\"$topic\"}[$interval])",
           "fullMetaSearch": false,
           "includeNullMetadata": false,
           "instant": false,
-          "legendFormat": "{{http_request_method}} {{http_route}}",
+          "legendFormat": "{{messaging_topic}}",
           "range": true,
           "refId": "A",
           "useBackend": false
         }
       ],
-      "title": "Async Agent Read Avg Latency",
+      "title": "Write Failures Avg Latency",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "description": "Write Failures Count",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "min": 0,
+          "noValue": "-",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 17
+      },
+      "id": 17,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.5.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "disableTextWrap": false,
+          "editorMode": "code",
+          "expr": "increase(messaging_write_failure_count_seconds_count{app=~\"$app\", instance=~\"$instance\", messaging_kind=~\"$kind\", messaging_topic=~\"$topic\"}[$interval])",
+          "fullMetaSearch": false,
+          "includeNullMetadata": false,
+          "instant": false,
+          "legendFormat": "{{messaging_topic}}",
+          "range": true,
+          "refId": "A",
+          "useBackend": false
+        }
+      ],
+      "title": "Write Failures Count",
+      "type": "timeseries"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 25
+      },
+      "id": 18,
+      "panels": [],
+      "repeat": "kind",
+      "title": "$kind Subscriber",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "description": "Average response latency",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "min": 0,
+          "noValue": "-",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "s"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 26
+      },
+      "id": 3,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.5.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "disableTextWrap": false,
+          "editorMode": "code",
+          "expr": "rate(messaging_read_body_duration_seconds_sum{app=~\"$app\", instance=~\"$instance\", messaging_origin=\"subscriber\",messaging_kind=~\"$kind\", messaging_topic=~\"$topic\"}[$interval]) / rate(messaging_read_body_duration_seconds_count{app=~\"$app\", instance=~\"$instance\", messaging_origin=\"subscriber\",messaging_kind=~\"$kind\", messaging_topic=~\"$topic\"}[$interval])",
+          "fullMetaSearch": false,
+          "includeNullMetadata": false,
+          "instant": false,
+          "legendFormat": "{{messaging_topic}}",
+          "range": true,
+          "refId": "A",
+          "useBackend": false
+        }
+      ],
+      "title": "Subscriber Avg Latency",
       "type": "timeseries"
     },
     {
@@ -1009,7 +860,393 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 32
+        "y": 26
+      },
+      "id": 5,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.5.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "disableTextWrap": false,
+          "editorMode": "code",
+          "expr": "rate(messaging_read_body_size_bytes_sum{app=~\"$app\", instance=~\"$instance\", messaging_origin=\"subscriber\",messaging_kind=~\"$kind\", messaging_topic=~\"$topic\"}[$interval]) / rate(messaging_read_body_size_bytes_count{app=~\"$app\", instance=~\"$instance\", messaging_origin=\"subscriber\", messaging_kind=~\"$kind\", messaging_topic=~\"$topic\"}[$interval])",
+          "fullMetaSearch": false,
+          "includeNullMetadata": false,
+          "instant": false,
+          "legendFormat": "{{messaging_topic}}",
+          "range": true,
+          "refId": "A",
+          "useBackend": false
+        }
+      ],
+      "title": "Subscriber Avg Size",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "description": "Histogram showing time spent reading on a subscriber backend.",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "scaleDistribution": {
+              "type": "linear"
+            }
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 34
+      },
+      "id": 2,
+      "interval": "$interval",
+      "options": {
+        "calculate": false,
+        "cellGap": 1,
+        "color": {
+          "exponent": 0.5,
+          "fill": "dark-orange",
+          "mode": "scheme",
+          "reverse": false,
+          "scale": "exponential",
+          "scheme": "Oranges",
+          "steps": 64
+        },
+        "exemplars": {
+          "color": "rgba(255,0,255,0.7)"
+        },
+        "filterValues": {
+          "le": 1e-9
+        },
+        "legend": {
+          "show": true,
+          "showLegend": true
+        },
+        "rowsFrame": {
+          "layout": "auto"
+        },
+        "tooltip": {
+          "mode": "single",
+          "showColorScale": false,
+          "yHistogram": false
+        },
+        "yAxis": {
+          "axisPlacement": "left",
+          "reverse": false,
+          "unit": "s"
+        }
+      },
+      "pluginVersion": "11.5.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "disableTextWrap": false,
+          "editorMode": "code",
+          "expr": "sum(increase(messaging_read_body_duration_seconds_bucket{app=~\"$app\", instance=~\"$instance\", messaging_origin=\"subscriber\",messaging_kind=~\"$kind\", messaging_topic=~\"$topic\"}[$__interval])) by (le)",
+          "format": "heatmap",
+          "fullMetaSearch": false,
+          "includeNullMetadata": false,
+          "instant": false,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A",
+          "useBackend": false
+        }
+      ],
+      "title": "Subscriber Read Duration",
+      "type": "heatmap"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "description": "Histogram showing body size read on subscriber backends.",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "scaleDistribution": {
+              "type": "linear"
+            }
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 34
+      },
+      "id": 6,
+      "interval": "$interval",
+      "options": {
+        "calculate": false,
+        "cellGap": 1,
+        "color": {
+          "exponent": 0.5,
+          "fill": "dark-orange",
+          "mode": "scheme",
+          "reverse": false,
+          "scale": "exponential",
+          "scheme": "Oranges",
+          "steps": 64
+        },
+        "exemplars": {
+          "color": "rgba(255,0,255,0.7)"
+        },
+        "filterValues": {
+          "le": 1e-9
+        },
+        "legend": {
+          "show": true,
+          "showLegend": true
+        },
+        "rowsFrame": {
+          "layout": "auto"
+        },
+        "tooltip": {
+          "mode": "single",
+          "showColorScale": false,
+          "yHistogram": false
+        },
+        "yAxis": {
+          "axisPlacement": "left",
+          "reverse": false,
+          "unit": "decbytes"
+        }
+      },
+      "pluginVersion": "11.5.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "disableTextWrap": false,
+          "editorMode": "code",
+          "expr": "sum(increase(messaging_read_body_size_bytes_bucket{app=~\"$app\", instance=~\"$instance\", messaging_origin=\"subscriber\",messaging_kind=~\"$kind\", messaging_topic=~\"$topic\"}[$__interval])) by (le)",
+          "format": "heatmap",
+          "fullMetaSearch": false,
+          "includeNullMetadata": false,
+          "instant": false,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A",
+          "useBackend": false
+        }
+      ],
+      "title": "Subscriber Read Size",
+      "type": "heatmap"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "description": "Average read latency",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "min": 0,
+          "noValue": "-",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "s"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 42
+      },
+      "id": 10,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.5.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "disableTextWrap": false,
+          "editorMode": "code",
+          "expr": "rate(messaging_read_body_duration_seconds_sum{app=~\"$app\", instance=~\"$instance\", messaging_origin=\"asyncagent\",messaging_kind=~\"$kind\", messaging_topic=~\"$topic\"}[$interval]) / rate(messaging_read_body_duration_seconds_count{app=~\"$app\", instance=~\"$instance\",  messaging_origin=\"asyncagent\",messaging_kind=~\"$kind\", messaging_topic=~\"$topic\"}[$interval])",
+          "fullMetaSearch": false,
+          "includeNullMetadata": false,
+          "instant": false,
+          "legendFormat": "{{messaging_topic}}",
+          "range": true,
+          "refId": "A",
+          "useBackend": false
+        }
+      ],
+      "title": "Async Agent Read Avg Latency",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "description": "Average body size",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "min": 0,
+          "noValue": "-",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "decbytes"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 42
       },
       "id": 11,
       "options": {
@@ -1038,7 +1275,7 @@
           "fullMetaSearch": false,
           "includeNullMetadata": false,
           "instant": false,
-          "legendFormat": "{{http_request_method}} {{http_route}}",
+          "legendFormat": "{{messaging_topic}}",
           "range": true,
           "refId": "A",
           "useBackend": false
@@ -1072,7 +1309,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 40
+        "y": 50
       },
       "id": 12,
       "interval": "$interval",
@@ -1160,7 +1397,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 40
+        "y": 50
       },
       "id": 13,
       "interval": "$interval",
@@ -1274,8 +1511,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -1291,7 +1527,7 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 48
+        "y": 58
       },
       "id": 14,
       "options": {
@@ -1316,11 +1552,11 @@
           },
           "disableTextWrap": false,
           "editorMode": "code",
-          "expr": "rate(messaging_read_failure_count_seconds_sum{app=~\"$app\", instance=~\"$instance\", messaging_origin=\"asyncagent\",messaging_kind=~\"$kind\", messaging_topic=~\"$topic\"}[$interval]) / rate(messaging_read_failure_count_seconds_count{app=~\"$app\", instance=~\"$instance\",  messaging_origin=\"asyncagent\",messaging_kind=~\"$kind\", messaging_topic=~\"$topic\"}[$interval])",
+          "expr": "rate(messaging_read_failure_count_seconds_sum{app=~\"$app\", instance=~\"$instance\", messaging_kind=~\"$kind\", messaging_topic=~\"$topic\"}[$interval]) / rate(messaging_read_failure_count_seconds_count{app=~\"$app\", instance=~\"$instance\", messaging_kind=~\"$kind\", messaging_topic=~\"$topic\"}[$interval])",
           "fullMetaSearch": false,
           "includeNullMetadata": false,
           "instant": false,
-          "legendFormat": "__auto",
+          "legendFormat": "{{messaging_origin}} {{messaging_topic}}",
           "range": true,
           "refId": "A",
           "useBackend": false
@@ -1380,8 +1616,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -1396,7 +1631,7 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 48
+        "y": 58
       },
       "id": 16,
       "options": {
@@ -1421,11 +1656,11 @@
           },
           "disableTextWrap": false,
           "editorMode": "code",
-          "expr": "rate(messaging_read_failure_count_seconds_count{app=~\"$app\", instance=~\"$instance\", messaging_origin=\"asyncagent\",messaging_kind=~\"$kind\", messaging_topic=~\"$topic\"}[$interval])",
+          "expr": "increase(messaging_read_failure_count_seconds_count{app=~\"$app\", instance=~\"$instance\",messaging_kind=~\"$kind\", messaging_topic=~\"$topic\"}[$interval])",
           "fullMetaSearch": false,
           "includeNullMetadata": false,
           "instant": false,
-          "legendFormat": "__auto",
+          "legendFormat": "{{messaging_origin}} {{messaging_topic}}",
           "range": true,
           "refId": "A",
           "useBackend": false
@@ -1439,7 +1674,7 @@
         "type": "prometheus",
         "uid": "${DS_PROMETHEUS}"
       },
-      "description": "Write Failures Avg Latency",
+      "description": "Average per message Processing latency",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -1485,8 +1720,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -1502,9 +1736,9 @@
         "h": 8,
         "w": 12,
         "x": 0,
-        "y": 56
+        "y": 66
       },
-      "id": 15,
+      "id": 20,
       "options": {
         "legend": {
           "calcs": [],
@@ -1527,17 +1761,17 @@
           },
           "disableTextWrap": false,
           "editorMode": "code",
-          "expr": "rate(messaging_write_failure_count_seconds_sum{app=~\"$app\", instance=~\"$instance\",messaging_kind=~\"$kind\", messaging_topic=~\"$topic\"}[$interval]) / rate(messaging_write_failure_count_seconds_count{app=~\"$app\", instance=~\"$instance\",  messaging_origin=\"asyncagent\",messaging_kind=~\"$kind\", messaging_topic=~\"$topic\"}[$interval])",
+          "expr": "rate(messaging_read_ack_duration_seconds_sum{app=~\"$app\", instance=~\"$instance\", messaging_origin=\"subscriber\",messaging_kind=~\"$kind\", messaging_topic=~\"$topic\"}[$interval]) / rate(messaging_read_ack_duration_seconds_count{app=~\"$app\", instance=~\"$instance\",  messaging_origin=\"subscriber\",messaging_kind=~\"$kind\", messaging_topic=~\"$topic\"}[$interval])",
           "fullMetaSearch": false,
           "includeNullMetadata": false,
           "instant": false,
-          "legendFormat": "__auto",
+          "legendFormat": "{{messaging_topic}}",
           "range": true,
           "refId": "A",
           "useBackend": false
         }
       ],
-      "title": "Write Failures Avg Latency",
+      "title": "Subscriber Processing Avg Latency",
       "type": "timeseries"
     },
     {
@@ -1545,7 +1779,7 @@
         "type": "prometheus",
         "uid": "${DS_PROMETHEUS}"
       },
-      "description": "Read Failures Count",
+      "description": "Average per message Processing latency",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -1591,15 +1825,15 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
                 "value": 80
               }
             ]
-          }
+          },
+          "unit": "s"
         },
         "overrides": []
       },
@@ -1607,9 +1841,9 @@
         "h": 8,
         "w": 12,
         "x": 12,
-        "y": 56
+        "y": 66
       },
-      "id": 17,
+      "id": 21,
       "options": {
         "legend": {
           "calcs": [],
@@ -1632,7 +1866,95 @@
           },
           "disableTextWrap": false,
           "editorMode": "code",
-          "expr": "rate(messaging_write_failure_count_seconds_count{app=~\"$app\", instance=~\"$instance\", messaging_origin=\"asyncagent\",messaging_kind=~\"$kind\", messaging_topic=~\"$topic\"}[$interval])",
+          "expr": "rate(messaging_read_ack_duration_seconds_sum{app=~\"$app\", instance=~\"$instance\", messaging_origin=\"asyncagent\",messaging_kind=~\"$kind\", messaging_topic=~\"$topic\"}[$interval]) / rate(messaging_read_ack_duration_seconds_count{app=~\"$app\", instance=~\"$instance\",  messaging_origin=\"asyncagent\",messaging_kind=~\"$kind\", messaging_topic=~\"$topic\"}[$interval])",
+          "fullMetaSearch": false,
+          "includeNullMetadata": false,
+          "instant": false,
+          "legendFormat": "{{messaging_topic}}",
+          "range": true,
+          "refId": "A",
+          "useBackend": false
+        }
+      ],
+      "title": "Async Agent Processing Avg Latency",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "description": "Histogram showing time spent processing messages read by subscribers.",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "scaleDistribution": {
+              "type": "linear"
+            }
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 74
+      },
+      "id": 22,
+      "interval": "$interval",
+      "options": {
+        "calculate": false,
+        "cellGap": 1,
+        "color": {
+          "exponent": 0.5,
+          "fill": "dark-orange",
+          "mode": "scheme",
+          "reverse": false,
+          "scale": "exponential",
+          "scheme": "Oranges",
+          "steps": 64
+        },
+        "exemplars": {
+          "color": "rgba(255,0,255,0.7)"
+        },
+        "filterValues": {
+          "le": 1e-9
+        },
+        "legend": {
+          "show": true,
+          "showLegend": true
+        },
+        "rowsFrame": {
+          "layout": "auto"
+        },
+        "tooltip": {
+          "mode": "single",
+          "showColorScale": false,
+          "yHistogram": false
+        },
+        "yAxis": {
+          "axisPlacement": "left",
+          "reverse": false,
+          "unit": "s"
+        }
+      },
+      "pluginVersion": "11.5.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "disableTextWrap": false,
+          "editorMode": "code",
+          "expr": "sum(increase(messaging_read_ack_duration_seconds_bucket{app=~\"$app\", instance=~\"$instance\", messaging_origin=\"subscriber\",messaging_kind=~\"$kind\", messaging_topic=~\"$topic\"}[$__interval])) by (le)",
+          "format": "heatmap",
           "fullMetaSearch": false,
           "includeNullMetadata": false,
           "instant": false,
@@ -1642,8 +1964,96 @@
           "useBackend": false
         }
       ],
-      "title": "Read Failures Count",
-      "type": "timeseries"
+      "title": "Subscriber Processing Duration",
+      "type": "heatmap"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "description": "Histogram showing time spent processing messages read by async agent.",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "scaleDistribution": {
+              "type": "linear"
+            }
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 74
+      },
+      "id": 23,
+      "interval": "$interval",
+      "options": {
+        "calculate": false,
+        "cellGap": 1,
+        "color": {
+          "exponent": 0.5,
+          "fill": "dark-orange",
+          "mode": "scheme",
+          "reverse": false,
+          "scale": "exponential",
+          "scheme": "Oranges",
+          "steps": 64
+        },
+        "exemplars": {
+          "color": "rgba(255,0,255,0.7)"
+        },
+        "filterValues": {
+          "le": 1e-9
+        },
+        "legend": {
+          "show": true,
+          "showLegend": true
+        },
+        "rowsFrame": {
+          "layout": "auto"
+        },
+        "tooltip": {
+          "mode": "single",
+          "showColorScale": false,
+          "yHistogram": false
+        },
+        "yAxis": {
+          "axisPlacement": "left",
+          "reverse": false,
+          "unit": "s"
+        }
+      },
+      "pluginVersion": "11.5.2",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "disableTextWrap": false,
+          "editorMode": "code",
+          "expr": "sum(increase(messaging_read_ack_duration_seconds_bucket{app=~\"$app\", instance=~\"$instance\", messaging_origin=\"asyncagent\",messaging_kind=~\"$kind\", messaging_topic=~\"$topic\"}[$__interval])) by (le)",
+          "format": "heatmap",
+          "fullMetaSearch": false,
+          "includeNullMetadata": false,
+          "instant": false,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A",
+          "useBackend": false
+        }
+      ],
+      "title": "Async Agent Processing Duration",
+      "type": "heatmap"
     }
   ],
   "refresh": "",
@@ -1779,7 +2189,7 @@
     ]
   },
   "time": {
-    "from": "now-15m",
+    "from": "now-5m",
     "to": "now"
   },
   "timepicker": {},
