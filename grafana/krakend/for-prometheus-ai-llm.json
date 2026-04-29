@@ -7,6 +7,146 @@
       "type": "datasource",
       "pluginId": "prometheus",
       "pluginName": "Prometheus"
+    },
+    {
+      "name": "VAR_MODEL0",
+      "type": "constant",
+      "label": "model0",
+      "value": "claude-opus-4-1-20250805",
+      "description": ""
+    },
+    {
+      "name": "VAR_COST0",
+      "type": "constant",
+      "label": "cost0",
+      "value": "2.5",
+      "description": ""
+    },
+    {
+      "name": "VAR_MODEL1",
+      "type": "constant",
+      "label": "model1",
+      "value": "gpt-5.4-mini",
+      "description": ""
+    },
+    {
+      "name": "VAR_COST1",
+      "type": "constant",
+      "label": "cost1",
+      "value": "3.5",
+      "description": ""
+    },
+    {
+      "name": "VAR_MODEL2",
+      "type": "constant",
+      "label": "model2",
+      "value": "",
+      "description": ""
+    },
+    {
+      "name": "VAR_COST2",
+      "type": "constant",
+      "label": "cost2",
+      "value": "0",
+      "description": ""
+    },
+    {
+      "name": "VAR_MODEL3",
+      "type": "constant",
+      "label": "model3",
+      "value": "",
+      "description": ""
+    },
+    {
+      "name": "VAR_COST3",
+      "type": "constant",
+      "label": "cost3",
+      "value": "0",
+      "description": ""
+    },
+    {
+      "name": "VAR_MODEL4",
+      "type": "constant",
+      "label": "model4",
+      "value": "",
+      "description": ""
+    },
+    {
+      "name": "VAR_COST4",
+      "type": "constant",
+      "label": "cost4",
+      "value": "0",
+      "description": ""
+    },
+    {
+      "name": "VAR_MODEL5",
+      "type": "constant",
+      "label": "model5",
+      "value": "",
+      "description": ""
+    },
+    {
+      "name": "VAR_COST5",
+      "type": "constant",
+      "label": "cost5",
+      "value": "0",
+      "description": ""
+    },
+    {
+      "name": "VAR_MODEL6",
+      "type": "constant",
+      "label": "model6",
+      "value": "",
+      "description": ""
+    },
+    {
+      "name": "VAR_COST6",
+      "type": "constant",
+      "label": "cost6",
+      "value": "0",
+      "description": ""
+    },
+    {
+      "name": "VAR_MODEL7",
+      "type": "constant",
+      "label": "model7",
+      "value": "",
+      "description": ""
+    },
+    {
+      "name": "VAR_COST7",
+      "type": "constant",
+      "label": "cost7",
+      "value": "0",
+      "description": ""
+    },
+    {
+      "name": "VAR_MODEL8",
+      "type": "constant",
+      "label": "model8",
+      "value": "",
+      "description": ""
+    },
+    {
+      "name": "VAR_COST8",
+      "type": "constant",
+      "label": "cost8",
+      "value": "0",
+      "description": ""
+    },
+    {
+      "name": "VAR_MODEL9",
+      "type": "constant",
+      "label": "model9",
+      "value": "",
+      "description": ""
+    },
+    {
+      "name": "VAR_COST9",
+      "type": "constant",
+      "label": "cost9",
+      "value": "0",
+      "description": ""
     }
   ],
   "__elements": {},
@@ -66,10 +206,9 @@
         "x": 0,
         "y": 0
       },
-      "id": 3,
+      "id": 8,
       "panels": [],
-      "repeat": "provider",
-      "title": "Tokens $provider",
+      "title": "Estimated costs",
       "type": "row"
     },
     {
@@ -93,12 +232,12 @@
               }
             ]
           },
-          "unit": "short"
+          "unit": "currency:financial:$"
         },
         "overrides": []
       },
       "gridPos": {
-        "h": 5,
+        "h": 9,
         "w": 8,
         "x": 0,
         "y": 1
@@ -129,13 +268,13 @@
             "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
-          "expr": "sum(increase(krakend_llm_tokens_total{provider=~\"$provider\", app=~\"$app\", instance=~\"$instance\"}[$__range]))",
+          "expr": "sum((sum by(model) (label_replace(increase(krakend_llm_tokens_total{provider=~\"$provider\", app=~\"$app\", instance=~\"$instance\"}[$__range]), \"model\", \"unknown\", \"model\", \"^$\"))\n* on(model)\n(\n  label_replace(vector($cost0), \"model\", \"$model0\", \"\", \"\")\n  or label_replace(vector($cost1), \"model\", \"$model1\", \"\", \"\")\n  or label_replace(vector($cost2), \"model\", \"$model2\", \"\", \"\")\n  or label_replace(vector($cost3), \"model\", \"$model3\", \"\", \"\")\n  or label_replace(vector($cost4), \"model\", \"$model4\", \"\", \"\")\n  or label_replace(vector($cost5), \"model\", \"$model5\", \"\", \"\")\n  or label_replace(vector($cost6), \"model\", \"$model6\", \"\", \"\")\n  or label_replace(vector($cost7), \"model\", \"$model7\", \"\", \"\")\n  or label_replace(vector($cost8), \"model\", \"$model8\", \"\", \"\")\n  or label_replace(vector($cost9), \"model\", \"$model9\", \"\", \"\")\n)\n))",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "Total tokens",
+      "title": "Estimated costs",
       "type": "stat"
     },
     {
@@ -145,7 +284,49 @@
       },
       "fieldConfig": {
         "defaults": {
+          "color": {
+            "mode": "palette-classic-by-name",
+            "seriesBy": "last"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineStyle": {
+              "fill": "solid"
+            },
+            "lineWidth": 3,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "showValues": false,
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
           "mappings": [],
+          "noValue": "0",
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -159,192 +340,23 @@
               }
             ]
           },
-          "unit": "short"
+          "unit": "currency:financial:$"
         },
         "overrides": []
       },
       "gridPos": {
-        "h": 5,
-        "w": 8,
+        "h": 9,
+        "w": 16,
         "x": 8,
         "y": 1
       },
-      "id": 4,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "area",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "percentChangeColorMode": "standard",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showPercentChange": false,
-        "textMode": "auto",
-        "wideLayout": true
-      },
-      "pluginVersion": "12.3.1",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "expr": "sum(increase(krakend_llm_tokens_in_total{provider=~\"$provider\", app=~\"$app\", instance=~\"$instance\"}[$__range]))",
-          "legendFormat": "__auto",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "Total IN tokens",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": 0
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "short"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 5,
-        "w": 8,
-        "x": 16,
-        "y": 1
-      },
-      "id": 5,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "area",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "percentChangeColorMode": "standard",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showPercentChange": false,
-        "textMode": "auto",
-        "wideLayout": true
-      },
-      "pluginVersion": "12.3.1",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "expr": "sum(increase(krakend_llm_tokens_out_total{provider=~\"$provider\", app=~\"$app\", instance=~\"$instance\"}[$__range]))",
-          "legendFormat": "__auto",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "Total OUT tokens",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "continuous-GrYlRd"
-          },
-          "custom": {
-            "axisBorderShow": false,
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "barWidthFactor": 0.6,
-            "drawStyle": "line",
-            "fillOpacity": 20,
-            "gradientMode": "scheme",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "insertNulls": false,
-            "lineInterpolation": "smooth",
-            "lineWidth": 3,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "showValues": false,
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "noValue": "0",
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": 0
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 9,
-        "w": 12,
-        "x": 0,
-        "y": 6
-      },
-      "id": 1,
+      "id": 9,
       "options": {
         "legend": {
           "calcs": [],
-          "displayMode": "hidden",
-          "placement": "right",
-          "showLegend": false
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
         },
         "tooltip": {
           "hideZeros": false,
@@ -361,218 +373,562 @@
           },
           "editorMode": "code",
           "exemplar": false,
-          "expr": "increase(krakend_llm_tokens_total{provider=~\"$provider\", app=~\"$app\", instance=~\"$instance\"}[$interval])",
+          "expr": "(sum by(model) (label_replace(increase(krakend_llm_tokens_total{provider=~\"$provider\", app=~\"$app\", instance=~\"$instance\"}[$interval]), \"model\", \"unknown\", \"model\", \"^$\"))\n* on(model)\n(\n  label_replace(vector($cost0), \"model\", \"$model0\", \"\", \"\")\n  or label_replace(vector($cost1), \"model\", \"$model1\", \"\", \"\")\n  or label_replace(vector($cost2), \"model\", \"$model2\", \"\", \"\")\n  or label_replace(vector($cost3), \"model\", \"$model3\", \"\", \"\")\n  or label_replace(vector($cost4), \"model\", \"$model4\", \"\", \"\")\n  or label_replace(vector($cost5), \"model\", \"$model5\", \"\", \"\")\n  or label_replace(vector($cost6), \"model\", \"$model6\", \"\", \"\")\n  or label_replace(vector($cost7), \"model\", \"$model7\", \"\", \"\")\n  or label_replace(vector($cost8), \"model\", \"$model8\", \"\", \"\")\n  or label_replace(vector($cost9), \"model\", \"$model9\", \"\", \"\")\n)\n)\n",
           "instant": false,
           "interval": "",
-          "legendFormat": "__auto",
+          "legendFormat": "{{model}}",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "Total tokens",
+      "title": "Estimated costs",
       "type": "timeseries"
     },
     {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "continuous-GrYlRd"
-          },
-          "custom": {
-            "axisBorderShow": false,
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "barWidthFactor": 0.6,
-            "drawStyle": "line",
-            "fillOpacity": 20,
-            "gradientMode": "scheme",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "insertNulls": false,
-            "lineInterpolation": "smooth",
-            "lineWidth": 3,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "showValues": false,
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "noValue": "0",
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": 0
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
+      "collapsed": true,
       "gridPos": {
-        "h": 9,
-        "w": 12,
-        "x": 12,
-        "y": 6
-      },
-      "id": 6,
-      "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "hidden",
-          "placement": "right",
-          "showLegend": false
-        },
-        "tooltip": {
-          "hideZeros": false,
-          "mode": "single",
-          "sort": "none"
-        }
-      },
-      "pluginVersion": "12.3.1",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "exemplar": false,
-          "expr": "increase(krakend_llm_tokens_in_total{provider=~\"$provider\", app=~\"$app\", instance=~\"$instance\"}[$interval])",
-          "instant": false,
-          "legendFormat": "__auto",
-          "range": true,
-          "refId": "A"
-        }
-      ],
-      "title": "Total IN tokens",
-      "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "continuous-GrYlRd"
-          },
-          "custom": {
-            "axisBorderShow": false,
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "barWidthFactor": 0.6,
-            "drawStyle": "line",
-            "fillOpacity": 20,
-            "gradientMode": "scheme",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "insertNulls": false,
-            "lineInterpolation": "smooth",
-            "lineWidth": 3,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "showValues": false,
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "noValue": "0",
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": 0
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 9,
-        "w": 12,
+        "h": 1,
+        "w": 24,
         "x": 0,
-        "y": 15
+        "y": 10
       },
-      "id": 7,
-      "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "hidden",
-          "placement": "right",
-          "showLegend": false
-        },
-        "tooltip": {
-          "hideZeros": false,
-          "mode": "single",
-          "sort": "none"
-        }
-      },
-      "pluginVersion": "12.3.1",
-      "targets": [
+      "id": 3,
+      "panels": [
         {
           "datasource": {
             "type": "prometheus",
             "uid": "${DS_PROMETHEUS}"
           },
-          "editorMode": "code",
-          "exemplar": false,
-          "expr": "increase(krakend_llm_tokens_out_total{provider=~\"$provider\", app=~\"$app\", instance=~\"$instance\"}[$interval])",
-          "instant": false,
-          "legendFormat": "__auto",
-          "range": true,
-          "refId": "A"
+          "fieldConfig": {
+            "defaults": {
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": 0
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "short"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 5,
+            "w": 8,
+            "x": 0,
+            "y": 11
+          },
+          "id": 10,
+          "options": {
+            "colorMode": "value",
+            "graphMode": "area",
+            "justifyMode": "auto",
+            "orientation": "auto",
+            "percentChangeColorMode": "standard",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "showPercentChange": false,
+            "textMode": "auto",
+            "wideLayout": true
+          },
+          "pluginVersion": "12.3.1",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "expr": "sum(increase(krakend_llm_tokens_total{provider=~\"$provider\", app=~\"$app\", instance=~\"$instance\"}[$__range]))",
+              "legendFormat": "__auto",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "Total tokens",
+          "type": "stat"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": 0
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "short"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 5,
+            "w": 8,
+            "x": 8,
+            "y": 11
+          },
+          "id": 4,
+          "options": {
+            "colorMode": "value",
+            "graphMode": "area",
+            "justifyMode": "auto",
+            "orientation": "auto",
+            "percentChangeColorMode": "standard",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "showPercentChange": false,
+            "textMode": "auto",
+            "wideLayout": true
+          },
+          "pluginVersion": "12.3.1",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "expr": "sum(increase(krakend_llm_tokens_in_total{provider=~\"$provider\", app=~\"$app\", instance=~\"$instance\"}[$__range]))",
+              "legendFormat": "__auto",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "Total IN tokens",
+          "type": "stat"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": 0
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "short"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 5,
+            "w": 8,
+            "x": 16,
+            "y": 11
+          },
+          "id": 5,
+          "options": {
+            "colorMode": "value",
+            "graphMode": "area",
+            "justifyMode": "auto",
+            "orientation": "auto",
+            "percentChangeColorMode": "standard",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "showPercentChange": false,
+            "textMode": "auto",
+            "wideLayout": true
+          },
+          "pluginVersion": "12.3.1",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "expr": "sum(increase(krakend_llm_tokens_out_total{provider=~\"$provider\", app=~\"$app\", instance=~\"$instance\"}[$__range]))",
+              "legendFormat": "__auto",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "Total OUT tokens",
+          "type": "stat"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic-by-name",
+                "seriesBy": "last"
+              },
+              "custom": {
+                "axisBorderShow": false,
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "barWidthFactor": 0.6,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "insertNulls": false,
+                "lineInterpolation": "linear",
+                "lineStyle": {
+                  "fill": "solid"
+                },
+                "lineWidth": 3,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "showValues": false,
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "noValue": "0",
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": 0
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": [
+              {
+                "__systemRef": "hideSeriesFrom",
+                "matcher": {
+                  "id": "byNames",
+                  "options": {
+                    "mode": "exclude",
+                    "names": [
+                      "claude-opus-4-1-20250805"
+                    ],
+                    "prefix": "All except:",
+                    "readOnly": true
+                  }
+                },
+                "properties": [
+                  {
+                    "id": "custom.hideFrom",
+                    "value": {
+                      "legend": false,
+                      "tooltip": true,
+                      "viz": true
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 9,
+            "w": 12,
+            "x": 0,
+            "y": 62
+          },
+          "id": 1,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "hideZeros": false,
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "pluginVersion": "12.3.1",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "exemplar": false,
+              "expr": "sum by(model) (label_replace(increase(krakend_llm_tokens_total{provider=~\"$provider\", app=~\"$app\", instance=~\"$instance\"}[$interval]),\"model\", \"unknown\", \"model\", \"^$\"))",
+              "instant": false,
+              "interval": "",
+              "legendFormat": "{{model}}",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "Total tokens",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic-by-name"
+              },
+              "custom": {
+                "axisBorderShow": false,
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "barWidthFactor": 0.6,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "insertNulls": false,
+                "lineInterpolation": "linear",
+                "lineWidth": 3,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "showValues": false,
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "noValue": "0",
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": 0
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 9,
+            "w": 12,
+            "x": 12,
+            "y": 62
+          },
+          "id": 6,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "hideZeros": false,
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "pluginVersion": "12.3.1",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "exemplar": false,
+              "expr": "sum by(model) (label_replace(increase(krakend_llm_tokens_in_total{provider=~\"$provider\", app=~\"$app\", instance=~\"$instance\"}[$interval]),\"model\", \"unknown\", \"model\", \"^$\"))",
+              "instant": false,
+              "legendFormat": "{{model}}",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "Total IN tokens",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic-by-name"
+              },
+              "custom": {
+                "axisBorderShow": false,
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "barWidthFactor": 0.6,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "insertNulls": false,
+                "lineInterpolation": "linear",
+                "lineWidth": 3,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "showValues": false,
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "noValue": "0",
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": 0
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 9,
+            "w": 12,
+            "x": 0,
+            "y": 71
+          },
+          "id": 7,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "hideZeros": false,
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "pluginVersion": "12.3.1",
+          "targets": [
+            {
+              "datasource": {
+                "type": "prometheus",
+                "uid": "${DS_PROMETHEUS}"
+              },
+              "editorMode": "code",
+              "exemplar": false,
+              "expr": "sum by(model) (label_replace(increase(krakend_llm_tokens_out_total{provider=~\"$provider\", app=~\"$app\", instance=~\"$instance\"}[$interval]),\"model\", \"unknown\", \"model\", \"^$\"))",
+              "instant": false,
+              "legendFormat": "{{model}}",
+              "range": true,
+              "refId": "A"
+            }
+          ],
+          "title": "Total OUT tokens",
+          "type": "timeseries"
         }
       ],
-      "title": "Total OUT tokens",
-      "type": "timeseries"
+      "repeat": "provider",
+      "title": "Tokens $provider",
+      "type": "row"
     }
   ],
   "preload": false,
@@ -690,18 +1046,398 @@
         "query": "1m,5m,15m,30m,1h,2h,1d",
         "refresh": 2,
         "type": "interval"
+      },
+      {
+        "hide": 2,
+        "name": "model0",
+        "query": "${VAR_MODEL0}",
+        "skipUrlSync": true,
+        "type": "constant",
+        "current": {
+          "value": "${VAR_MODEL0}",
+          "text": "${VAR_MODEL0}",
+          "selected": false
+        },
+        "options": [
+          {
+            "value": "${VAR_MODEL0}",
+            "text": "${VAR_MODEL0}",
+            "selected": false
+          }
+        ]
+      },
+      {
+        "hide": 2,
+        "name": "cost0",
+        "query": "${VAR_COST0}",
+        "skipUrlSync": true,
+        "type": "constant",
+        "current": {
+          "value": "${VAR_COST0}",
+          "text": "${VAR_COST0}",
+          "selected": false
+        },
+        "options": [
+          {
+            "value": "${VAR_COST0}",
+            "text": "${VAR_COST0}",
+            "selected": false
+          }
+        ]
+      },
+      {
+        "hide": 2,
+        "name": "model1",
+        "query": "${VAR_MODEL1}",
+        "skipUrlSync": true,
+        "type": "constant",
+        "current": {
+          "value": "${VAR_MODEL1}",
+          "text": "${VAR_MODEL1}",
+          "selected": false
+        },
+        "options": [
+          {
+            "value": "${VAR_MODEL1}",
+            "text": "${VAR_MODEL1}",
+            "selected": false
+          }
+        ]
+      },
+      {
+        "hide": 2,
+        "name": "cost1",
+        "query": "${VAR_COST1}",
+        "skipUrlSync": true,
+        "type": "constant",
+        "current": {
+          "value": "${VAR_COST1}",
+          "text": "${VAR_COST1}",
+          "selected": false
+        },
+        "options": [
+          {
+            "value": "${VAR_COST1}",
+            "text": "${VAR_COST1}",
+            "selected": false
+          }
+        ]
+      },
+      {
+        "hide": 2,
+        "name": "model2",
+        "query": "${VAR_MODEL2}",
+        "skipUrlSync": true,
+        "type": "constant",
+        "current": {
+          "value": "${VAR_MODEL2}",
+          "text": "${VAR_MODEL2}",
+          "selected": false
+        },
+        "options": [
+          {
+            "value": "${VAR_MODEL2}",
+            "text": "${VAR_MODEL2}",
+            "selected": false
+          }
+        ]
+      },
+      {
+        "hide": 2,
+        "name": "cost2",
+        "query": "${VAR_COST2}",
+        "skipUrlSync": true,
+        "type": "constant",
+        "current": {
+          "value": "${VAR_COST2}",
+          "text": "${VAR_COST2}",
+          "selected": false
+        },
+        "options": [
+          {
+            "value": "${VAR_COST2}",
+            "text": "${VAR_COST2}",
+            "selected": false
+          }
+        ]
+      },
+      {
+        "hide": 2,
+        "name": "model3",
+        "query": "${VAR_MODEL3}",
+        "skipUrlSync": true,
+        "type": "constant",
+        "current": {
+          "value": "${VAR_MODEL3}",
+          "text": "${VAR_MODEL3}",
+          "selected": false
+        },
+        "options": [
+          {
+            "value": "${VAR_MODEL3}",
+            "text": "${VAR_MODEL3}",
+            "selected": false
+          }
+        ]
+      },
+      {
+        "hide": 2,
+        "name": "cost3",
+        "query": "${VAR_COST3}",
+        "skipUrlSync": true,
+        "type": "constant",
+        "current": {
+          "value": "${VAR_COST3}",
+          "text": "${VAR_COST3}",
+          "selected": false
+        },
+        "options": [
+          {
+            "value": "${VAR_COST3}",
+            "text": "${VAR_COST3}",
+            "selected": false
+          }
+        ]
+      },
+      {
+        "hide": 2,
+        "name": "model4",
+        "query": "${VAR_MODEL4}",
+        "skipUrlSync": true,
+        "type": "constant",
+        "current": {
+          "value": "${VAR_MODEL4}",
+          "text": "${VAR_MODEL4}",
+          "selected": false
+        },
+        "options": [
+          {
+            "value": "${VAR_MODEL4}",
+            "text": "${VAR_MODEL4}",
+            "selected": false
+          }
+        ]
+      },
+      {
+        "hide": 2,
+        "name": "cost4",
+        "query": "${VAR_COST4}",
+        "skipUrlSync": true,
+        "type": "constant",
+        "current": {
+          "value": "${VAR_COST4}",
+          "text": "${VAR_COST4}",
+          "selected": false
+        },
+        "options": [
+          {
+            "value": "${VAR_COST4}",
+            "text": "${VAR_COST4}",
+            "selected": false
+          }
+        ]
+      },
+      {
+        "hide": 2,
+        "name": "model5",
+        "query": "${VAR_MODEL5}",
+        "skipUrlSync": true,
+        "type": "constant",
+        "current": {
+          "value": "${VAR_MODEL5}",
+          "text": "${VAR_MODEL5}",
+          "selected": false
+        },
+        "options": [
+          {
+            "value": "${VAR_MODEL5}",
+            "text": "${VAR_MODEL5}",
+            "selected": false
+          }
+        ]
+      },
+      {
+        "hide": 2,
+        "name": "cost5",
+        "query": "${VAR_COST5}",
+        "skipUrlSync": true,
+        "type": "constant",
+        "current": {
+          "value": "${VAR_COST5}",
+          "text": "${VAR_COST5}",
+          "selected": false
+        },
+        "options": [
+          {
+            "value": "${VAR_COST5}",
+            "text": "${VAR_COST5}",
+            "selected": false
+          }
+        ]
+      },
+      {
+        "hide": 2,
+        "name": "model6",
+        "query": "${VAR_MODEL6}",
+        "skipUrlSync": true,
+        "type": "constant",
+        "current": {
+          "value": "${VAR_MODEL6}",
+          "text": "${VAR_MODEL6}",
+          "selected": false
+        },
+        "options": [
+          {
+            "value": "${VAR_MODEL6}",
+            "text": "${VAR_MODEL6}",
+            "selected": false
+          }
+        ]
+      },
+      {
+        "hide": 2,
+        "name": "cost6",
+        "query": "${VAR_COST6}",
+        "skipUrlSync": true,
+        "type": "constant",
+        "current": {
+          "value": "${VAR_COST6}",
+          "text": "${VAR_COST6}",
+          "selected": false
+        },
+        "options": [
+          {
+            "value": "${VAR_COST6}",
+            "text": "${VAR_COST6}",
+            "selected": false
+          }
+        ]
+      },
+      {
+        "hide": 2,
+        "name": "model7",
+        "query": "${VAR_MODEL7}",
+        "skipUrlSync": true,
+        "type": "constant",
+        "current": {
+          "value": "${VAR_MODEL7}",
+          "text": "${VAR_MODEL7}",
+          "selected": false
+        },
+        "options": [
+          {
+            "value": "${VAR_MODEL7}",
+            "text": "${VAR_MODEL7}",
+            "selected": false
+          }
+        ]
+      },
+      {
+        "hide": 2,
+        "name": "cost7",
+        "query": "${VAR_COST7}",
+        "skipUrlSync": true,
+        "type": "constant",
+        "current": {
+          "value": "${VAR_COST7}",
+          "text": "${VAR_COST7}",
+          "selected": false
+        },
+        "options": [
+          {
+            "value": "${VAR_COST7}",
+            "text": "${VAR_COST7}",
+            "selected": false
+          }
+        ]
+      },
+      {
+        "hide": 2,
+        "name": "model8",
+        "query": "${VAR_MODEL8}",
+        "skipUrlSync": true,
+        "type": "constant",
+        "current": {
+          "value": "${VAR_MODEL8}",
+          "text": "${VAR_MODEL8}",
+          "selected": false
+        },
+        "options": [
+          {
+            "value": "${VAR_MODEL8}",
+            "text": "${VAR_MODEL8}",
+            "selected": false
+          }
+        ]
+      },
+      {
+        "hide": 2,
+        "name": "cost8",
+        "query": "${VAR_COST8}",
+        "skipUrlSync": true,
+        "type": "constant",
+        "current": {
+          "value": "${VAR_COST8}",
+          "text": "${VAR_COST8}",
+          "selected": false
+        },
+        "options": [
+          {
+            "value": "${VAR_COST8}",
+            "text": "${VAR_COST8}",
+            "selected": false
+          }
+        ]
+      },
+      {
+        "hide": 2,
+        "name": "model9",
+        "query": "${VAR_MODEL9}",
+        "skipUrlSync": true,
+        "type": "constant",
+        "current": {
+          "value": "${VAR_MODEL9}",
+          "text": "${VAR_MODEL9}",
+          "selected": false
+        },
+        "options": [
+          {
+            "value": "${VAR_MODEL9}",
+            "text": "${VAR_MODEL9}",
+            "selected": false
+          }
+        ]
+      },
+      {
+        "hide": 2,
+        "name": "cost9",
+        "query": "${VAR_COST9}",
+        "skipUrlSync": true,
+        "type": "constant",
+        "current": {
+          "value": "${VAR_COST9}",
+          "text": "${VAR_COST9}",
+          "selected": false
+        },
+        "options": [
+          {
+            "value": "${VAR_COST9}",
+            "text": "${VAR_COST9}",
+            "selected": false
+          }
+        ]
       }
     ]
   },
   "time": {
-    "from": "now-15m",
+    "from": "now-2d",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "browser",
   "title": "AI LLM",
   "uid": "krl5rh5",
-  "version": 2,
+  "version": 8,
   "weekStart": "",
   "id": null
 }
